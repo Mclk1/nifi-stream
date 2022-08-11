@@ -1,0 +1,20 @@
+# nifi.properties kısmında yapilmasi gereken ayarlar
+
+# Site to Site properties
+nifi.remote.input.http.enabled = false
+
+# web properties #
+nifi.web.http.host=
+nifi.web.http.port=8080
+
+nifi.web.https.host=
+nifi.web.https.port=
+
+# security properties #
+nifi.security.keystore=
+nifi.security.keystoreType=
+nifi.security.keystorePasswd=
+nifi.security.keyPasswd=
+nifi.security.truststore=
+nifi.security.truststoreType=
+nifi.security.truststorePasswd=
