@@ -1,0 +1,84 @@
+select 
+ 	${now() :toNumber()} as insertTimestamp
+	,depAirport
+	,arrAirport
+	,airlineName
+	,flightNumber
+    	,LiveUpdated
+    	,latitude
+	,longitude
+    	,altitude
+    	,direction
+	,speedHorizontal
+   	,speed_vertical 
+from FLOWFILE
+
+
+{
+	"type":"record"
+	,"name":"jsonFlights"
+	,"namespace":"nifi.aviation.jsonFlights",
+	"fields":[
+		{"name": "flight_date","type": ["null","string"]},
+		{"name":"flight_status", "type": ["null","string"]},
+		{"name":"depAirport","type": ["null","string"]},
+		{"name":"depTimezone","type": ["null","string"]},
+		{"name": "arrAirport","type" : ["null","string"]},
+		{"name" : "arrTimezone","type": ["null","string"]},
+		{"name": "arrTerminal","type": ["null","string"]},
+		{"name": "arrGate","type": ["null","string"]},
+		{"name": "airlineName","type": ["null","string"]},
+		{"name" :"flightNumber","type": ["null","string"]},
+		{"name": "aircraft_Registration","type": ["null","string"]},
+		{"name" : "LiveUpdated","type": ["null" ,"string"]},
+		{"name" : "latitude","type": ["null","string"]},
+		{"name":"longitude","type": ["null","string"]},
+		{"name":"altitude","type": ["null","string"]},
+		{"name":"direction","type" : ["null","string"]},
+		{"name":"speedHorizontal","type": ["null","string"]},
+		{"name":"speedVertical","type": ["null", "string"]},
+		{"name" :"isGround","type": ["null","string"]}
+]}
+
+
+
+
+
+[{
+	"operation": "shift",
+  	"spec":
+  	{
+     	"flight_date": "flight_date",
+      	"flight_status": "flight_status",
+      	"departure" : {
+          "airport" : "depAirport",
+          "timezone": "depTimezone"
+        },
+      	"arrival" : {
+    		"airport" : "arrAirport",
+    		"timezone" : "arrTimezone",
+    		"terminal" : "arrTerminal",
+ 	   		"gate" : "arrGate"
+ 	   },
+       "airline" : {
+    		"name" : "airlineName"
+ 	   },
+    	"flight" : {
+    		"number" : "flightNumber"   
+       },
+        "aircraft" : {
+    		"registration" : "aircraftRegistration"
+        },
+        "live" : {
+    		"updated" : "LiveUpdated",
+    		"latitude" : "latitude",
+    		"longitude" : "longitude",
+    		"altitude" : "altitude",
+    		"direction" : "direction",
+    		"speed_horizontal" : "speed_horizontal",
+    		"speed_vertical" : "speed_vertical",
+    		"is_ground" : "is_ground"
+ 		 }
+      
+  	}
+}]
